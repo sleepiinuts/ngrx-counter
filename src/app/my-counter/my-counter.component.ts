@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { CounterActions } from '../store/counter.actions';
 import { CommonModule } from '@angular/common';
+import { State } from '../store/counter.reducer';
 
 @Component({
   selector: 'app-my-counter',
@@ -12,11 +13,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './my-counter.component.css',
 })
 export class MyCounterComponent implements OnInit {
-  count$: Observable<number>;
+  count$: Observable<State>;
 
-  constructor(private store: Store<{ counter: number; nothing: number }>) {
+  constructor(private store: Store<{ counter: State; nothing: number }>) {
     // Store<{#Name: #Structure}>
-    // #Name: should match what you declare at stateProvider in app.config.this
+    // #Name: should match what you declare at stateProvider in app.config.ts
     // #Structure: should match the state structure declared in the store of #Name
     // notice: excessive #Name in Store<{#Name: #Structure}>, as in nothing, does NOT cause any error
 
