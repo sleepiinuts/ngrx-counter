@@ -13,21 +13,20 @@ import { CommonModule } from '@angular/common';
 })
 export class MyCounterComponent implements OnInit {
   count$: Observable<number>;
-  // count: number = -1;
 
-  constructor(private store: Store<{ counter: number }>) {
+  constructor(private store: Store<{ counter: number; nothing: number }>) {
+    // Store<{#Name: #Structure}>
+    // #Name: should match what you declare at stateProvider in app.config.this
+    // #Structure: should match the state structure declared in the store of #Name
+    // notice: excessive #Name in Store<{#Name: #Structure}>, as in nothing, does NOT cause any error
+
+    // this.store.select can ONLY select what is declare in #Name of private store
     this.count$ = this.store.select('counter');
   }
-  ngOnInit(): void {
-    // this.store.subscribe((c) => {
-    //   this.count = c.counter;
-    //   console.log('state: ' + c.counter);
-    // });
-  }
+  ngOnInit(): void {}
 
   increase() {
     this.store.dispatch(CounterActions.increase());
-    // console.log('counter: ' + JSON.stringify(this.count));
   }
 
   decrease() {
